@@ -62,6 +62,10 @@ class ETenderScraper:
             self.logger.error("FATAL ERROR: Failed to retrieve tenders!")
         
         for tender in tenders[:200]:
+            try:
+                tender["description"] = tender.get("description").capitalize()
+            except:pass
+
             self.tenders.append({"Services": tender.get("category"),
                                  "Description": tender.get("description"),
                                  "Date": "",
